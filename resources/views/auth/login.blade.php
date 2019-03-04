@@ -9,7 +9,7 @@
     <div id="app" v-cloak>
         <div class="login-box">
             <div class="login-logo">
-                <a href="{{ url('/home') }}"><b>SiG</b>ReS</a>
+                <a href="{{ url('/home') }}"><b>Prosarc S.A EPS</b></a>
             </div><!-- /.login-logo -->
 
         @if (count($errors) > 0)
