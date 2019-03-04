@@ -1,0 +1,53 @@
+Proceso PROSARC{
+
+	Cotizacion{
+		1) Clientes -> Datos del cliente
+	}
+
+	Declaracion Residuo(opcional){
+		1) Respel -> Almacenar datos del residuo, junto al generador del residuo
+	}
+
+	Solicitud del servicio{
+		1) Generador -> Datos del generador que esta solicitando el servicio
+		2) Respel -> Datos del residuo 
+		3) Fecha -> Fecha de creacion
+	}
+
+	Orden de servicio{
+		1)Programcion del vehiculo -> Datos de la programacion de los vehiculos
+			-Plan de Transporte
+	}
+
+	Recibo de material{
+		1) Cliente -> Datos del cliente (Solicitud del servicio)
+		2) Programacion del vehiculo -> Ver Conductor y Vehiculo Asignado
+		3) RespelEnvio -> Cantidad enviada, cantidad recibida
+		4) Horas -> Salida, llegada
+		5) Fecha -> Fecha de creacion
+	}
+
+	Consiliacion{
+		1) RespelEnvio -> Cantidad consolidada
+	}
+
+	Tratamiento y certificacion{
+		1)Tercerizado
+			-Proceso Prosarc con la entidad correspondiente
+			-Manifiesto -> Generarlo y ver generador, ver transportador, ver cliente, ver datos respel, nombre de la empresa tercearea
+			-Certificado -> Solicitud del certificado, inclusion en la base de datos
+
+		2)Prosarc
+			-Tratamiento -> Tratamiento correspondiente del residuo
+			-Certificado -> Generarlo y ver generador, ver transportador, ver cliente, ver datos respel
+	}
+
+	Facturacion{
+		1) Factura -> De acuerdo a la cotizacion, al peso consolidado
+	}
+
+	Cobro{
+		1) Cancelar -> Realizar el pago de la factura
+		2) Certificado -> Entrega de certificado
+	}
+}
