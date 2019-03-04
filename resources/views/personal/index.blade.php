@@ -24,7 +24,6 @@
                   <th>Nombre</th>
                   <th>Correo</th>
                   <th>Telefono</th>
-                  <th>Ver más..</th>
                 </tr>
               </thead>
               <tbody  hidden onload="renderTable()" id="readyTable">
@@ -47,7 +46,6 @@
                   <td>{{$Personal->PersFirstName." ".$Personal->PersSecondName." ".$Personal->PersLastName}}</td>
                   <td>{{$Personal->PersEmail}}</td>
                   <td>{{$Personal->PersCellphone}}</td>
-                  <td>{{$Personal->PersSlug}}</td>
                 </tr>
                 @endforeach
               </tbody>
