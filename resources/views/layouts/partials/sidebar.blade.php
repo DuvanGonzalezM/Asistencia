@@ -4,7 +4,7 @@
         <section class="sidebar">
 
             <!-- Sidebar user panel (optional) -->
-           {{--  @if (! Auth::guest())
+            @if (! Auth::guest())
                 <div class="user-panel">
                     <div class="pull-left image">
                         <img src="../../../images/{{ Auth::user()->UsAvatar }}"
@@ -16,7 +16,7 @@
                         <a href="#"><i class="fa fa-circle text-success" class="treeview-menu"></i> {{ trans('adminlte_lang::message.online') }}</a>
                     </div>
                 </div>
-            @endif --}}
+            @endif
 
             <!-- search form (Optional) -->
             <form action="#" method="get" class="sidebar-form">
@@ -32,9 +32,10 @@
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">{{ trans('adminlte_lang::message.header') }}</li>
-                <li><a href="/personal"><i class="fas fa-users"></i> Personal</a></li>
-                <li><a href="/asistencia"><i class="fas fa-tasks"></i> Asistencia</a></li>
-            </ul><!-- /.sidebar-menu -->
+                <li><a href="/personal"><i class="fas fa-users"></i><span> Personal</span></a></li>
+                <li><a href="/asistencia"><i class="fas fa-tasks"></i><span> Asistencia</span></a></li>
+            </ul>
+            <!-- /.sidebar-menu -->
         </section>
         <!-- /.sidebar -->
 </aside>
