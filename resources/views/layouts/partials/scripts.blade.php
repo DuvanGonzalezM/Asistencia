@@ -6,7 +6,7 @@
 
 
 <!-- DataTables -->
-
+<script src="{{ url (asset('/js/datatable-depen.js')) }}"></script>
 
 {{-- SmartWizard --}}
 
@@ -67,14 +67,7 @@
       "scrollX": false,
       "autoWidth": true,
       "keys": true,
-      "responsive": true,
-      "columnDefs": [ {
-        "targets": 6,
-        "data": "PersSlug",
-        "render": function ( data, type, row, meta ) {
-          return "<a method='get' href='/personal/" + data + "' class='btn btn-success' /*style='width:5em; height:2em '*/>Ver</a>";
-        }
-      }]
+      "responsive": true
     });
   });
 </script>

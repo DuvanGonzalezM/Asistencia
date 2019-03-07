@@ -18,7 +18,7 @@
 
 
     {{-- datatables style --}}
-    <link rel="stylesheet" type="text/css" href="public/css/datatable-depen.css">
+    <link href="{{ asset('css/datatable-depen.css') }}" rel="stylesheet" type="text/css">  
 
 {{-- script de idioma --}}
     <script>
