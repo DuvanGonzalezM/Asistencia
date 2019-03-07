@@ -32,8 +32,8 @@
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">{{ trans('adminlte_lang::message.header') }}</li>
-                <li><a href="/personal"><i class="fas fa-users"></i><span> Personal</span></a></li>
-                <li><a href="/asistencia"><i class="fas fa-tasks"></i><span> Asistencia</span></a></li>
+                <li><a href="/personal"><i class="fa fa-users"></i><span> Personal</span></a></li>
+                <li><a href="/asistencia"><i class="fa fa-tasks"></i><span> Asistencia</span></a></li>
             </ul>
             <!-- /.sidebar-menu -->
         </section>
