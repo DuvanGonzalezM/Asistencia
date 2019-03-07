@@ -1,4 +1,8 @@
 {
     "/js/app.js": "/js/app.js",
-    "/js/app-landing.js": "/js/app-landing.js"
+    "/js/app-landing.js": "/js/app-landing.js",
+    "/css/all.css": "/css/all.css",
+    "/css/all-landing.css": "/css/all-landing.css",
+    "/css/datatable-depen.css": "/css/datatable-depen.css",
+    "/js/datatable-depen.js": "/js/datatable-depen.js"
 }

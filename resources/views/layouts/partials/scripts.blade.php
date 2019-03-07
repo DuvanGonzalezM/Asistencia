@@ -2,11 +2,11 @@
 
 <!-- JQuery and bootstrap are required by Laravel 5.3 in resources/assets/js/bootstrap.js-->
 <!-- Laravel App -->
-<script src="{{ url (asset('/js/app.js')) }}"></script>
+<script src="{{ url (mix('/js/app.js')) }}"></script>
 
 
 <!-- DataTables -->
-<script src="{{ url (asset('/js/datatable-depen.js')) }}"></script>
+<script src="{{ url (mix('/js/datatable-depen.js')) }}"></script>
 
 {{-- SmartWizard --}}
 
@@ -98,6 +98,17 @@
           return "<a href='/asistencia/" + data + "/edit' class='btn btn-warning'>Edit</a>";
           }
       }]
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function () {
+    $('#AssistancesTable2').DataTable({
+      "scrollX": false,
+      "autoWidth": true,
+      "keys": true,
+      "responsive": true
     });
   });
 </script>

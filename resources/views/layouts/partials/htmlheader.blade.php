@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
 
-    <link href="{{ asset('css/all.css') }}" rel="stylesheet" type="text/css">    
+    <link href="{{ mix('css/all.css') }}" rel="stylesheet" type="text/css">    
 
     {{-- fuentes de google --}}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -18,7 +18,7 @@
 
 
     {{-- datatables style --}}
-    <link href="{{ asset('css/datatable-depen.css') }}" rel="stylesheet" type="text/css">  
+    <link href="{{ mix('css/datatable-depen.css') }}" rel="stylesheet" type="text/css">  
 
 {{-- script de idioma --}}
     <script>
