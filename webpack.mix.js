@@ -47,14 +47,14 @@ mix.js('resources/assets/js/app.js', 'public/js')
    .js('resources/assets/js/app-landing.js', 'public/js/app-landing.js')
    .sourceMaps()
    .combine([
-       'node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
+       'resources/assets/css/bootstrap.min.css',
        'resources/assets/css/font-awesome.min.css',
        'node_modules/admin-lte/dist/css/AdminLTE.min.css',
        'node_modules/admin-lte/dist/css/skins/_all-skins.css',
        'node_modules/icheck/skins/square/blue.css'
    ], 'public/css/all.css')
    .combine([
-       'node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
+       'resources/assets/css/bootstrap.min.css',
        'resources/assets/css/pratt_landing.min.css'
    ], 'public/css/all-landing.css')
    .combine([
