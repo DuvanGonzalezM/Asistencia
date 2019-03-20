@@ -23,6 +23,9 @@ class CreateAssistancesTable extends Migration
             $table->unsignedInteger('FK_AsisPers');
             $table->foreign('FK_AsisPers')->references('ID_Pers')->on('personals');
             $table->timestamps();
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
         });
     }
 

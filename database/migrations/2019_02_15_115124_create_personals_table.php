@@ -36,6 +36,9 @@ class CreatePersonalsTable extends Migration
             $table->date('PersSalida')->nullable();
             $table->string('PersSlug')->unique();
             $table->timestamps();
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
         });
     }
 
