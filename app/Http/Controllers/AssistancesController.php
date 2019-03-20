@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 use App\Assistance;
+use App\Personal;
+use DateTime;
 
 class AssistancesController extends Controller
 {
@@ -20,25 +22,48 @@ class AssistancesController extends Controller
         ->join('personals', 'assistances.FK_AsisPers', '=', 'personals.ID_Pers')
         ->select('personals.PersFirstName','personals.PersLastName','personals.PersDocNumber', 'personals.PersSlug', 'assistances.*')
         ->get();
-
+        foreach ($Asistencias as $Asistencia) {
+            $validacion = now()->diffInMinutes($Asistencia->AsisLlegada);
+            if ($validacion >= 840 && is_null($Asistencia->AsisSalida)) {
+                $newDate = strtotime ('+8 hour',strtotime($Asistencia->AsisLlegada));
+                $newDate = date ('Y-m-j H:i:s',$newDate);
+                $Asis = Assistance::where('ID_Asis',$Asistencia->ID_Asis)->first();
+                $Asis->AsisSalida = $newDate;
+                $Asis->AsisStatus = 0;
+                $Asis->AsisTrabajadas = 480;
+                $Asis->save();
+            }
+        }
         return view('assistances.index', compact('Asistencias'));
     }
 
     /**
      * Show the form for creating a new resource.
-     *
+     *and AsisSalida is null
      * @return \Illuminate\Http\Response
      */
     public function create(){
         $Asistencias = DB::table('assistances')
-        ->select('FK_AsisPers','ID_Asis','AsisSalida','AsisLlegada')
-        ->where('AsisFecha',date('Y-m-d'))
-        ->orWhereRaw('DATEDIFF(DATE_ADD(NOW(), INTERVAL -1 DAY),AsisLlegada) = 0 and AsisSalida is null')
-        ->get();
+            ->select('FK_AsisPers','ID_Asis','AsisSalida','AsisLlegada','AsisFecha')
+            ->where('AsisFecha',date('Y-m-d'))
+            ->orWhereRaw('DATEDIFF(DATE_ADD(NOW(), INTERVAL -1 DAY),AsisLlegada) = 0')
+            ->orderBy('AsisFecha', 'asc')
+            ->get();
         $personal = DB::table('personals')
-        ->select('*')
-        ->get();/*
-        return $Asistencias;*/
+            ->select('*')
+            ->get();
+        foreach ($Asistencias as $Asistencia) {
+            $validacion = now()->diffInMinutes($Asistencia->AsisLlegada);
+            if ($validacion >= 840 && is_null($Asistencia->AsisSalida)) {
+                $newDate = strtotime ('+8 hour',strtotime($Asistencia->AsisLlegada));
+                $newDate = date ('Y-m-j H:i:s',$newDate);
+                $Asis = Assistance::where('ID_Asis',$Asistencia->ID_Asis)->first();
+                $Asis->AsisSalida = $newDate;
+                $Asis->AsisStatus = 0;
+                $Asis->AsisTrabajadas = 480;
+                $Asis->save();
+            }
+        }
         if(Auth::user()->UsRol == "Vigilante"){
             return view('assistances.create',compact('personal','Asistencias'));
         }
@@ -54,12 +79,15 @@ class AssistancesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+        // return $request;
         $Asistencia = new Assistance();
         $Asistencia->AsisLlegada = now();
         $Asistencia->AsisFecha = date('Y-m-d');
+        $Asistencia->AsisTrabajadas = 0;
         $Asistencia->AsisStatus = 1;
-        $Asistencia->FK_AsisPers = $request->input('AsisPers');
+        $Asistencia->FK_AsisPers = $request->input('Llegada');
         $Asistencia->save();
+        // return $Asistencia;
         // return redirect()->route('asistencia.create', compact('Asistencia2'));
         return redirect()->route('asistencia.create');
     }
@@ -99,11 +127,10 @@ class AssistancesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id){
-        // return $request;
             $Asistencia  = Assistance::where('ID_Asis',$id)->first();
             if(!$request->input('llegada')){
                 $Asistencia->AsisSalida = now();
-                $Asistencia->AsisNocturnas = $Asistencia->AsisSalida->diffInHours($Asistencia->AsisLlegada);
+                $Asistencia->AsisTrabajadas = $Asistencia->AsisSalida->diffInMinutes($Asistencia->AsisLlegada);
                 $Asistencia->AsisStatus = 0;
                 $Asistencia->save();
                 return redirect()->route('asistencia.create');
@@ -111,7 +138,7 @@ class AssistancesController extends Controller
             else{
                 $Asistencia->AsisLlegada = Carbon::createFromFormat('Y-m-d H:i:s', $request->input('llegada'));
                 $Asistencia->AsisSalida = Carbon::createFromFormat('Y-m-d H:i:s', $request->input('salida'));
-                $Asistencia->AsisNocturnas = $Asistencia->AsisSalida->diffInHours($Asistencia->AsisLlegada);
+                $Asistencia->AsisTrabajadas = $Asistencia->AsisSalida->diffInHours($Asistencia->AsisLlegada);
                 $Asistencia->save();
                 return redirect()->route('asistencia.index');
             }

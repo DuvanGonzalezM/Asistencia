@@ -56,6 +56,12 @@ mix.js('resources/assets/js/app.js', 'public/js')
         'node_modules/datatables.net-select/js/dataTables.select.min.js',
         'node_modules/datatables.net-responsive/js/dataTables.responsive.min.js'
     ], 'public/js/datatable-depen.js')
+   .copy('resources/assets/css/stilosPropios.css','public/css/')
+   .scripts([
+        'node_modules/webcodecamjs/js/qrcodelib.js',
+        'node_modules/webcodecamjs/js/webcodecamjs.js'
+    ], 'public/js/webcodecam.js')
+   // .copy('resources/js/instascan.min.js','public/js/')
           // PACKAGE (ADMINLTE-LARAVEL) RESOURCES
          // .copy('resources/assets/img/*.*','public/img/')
          // //VENDOR RESOURCES

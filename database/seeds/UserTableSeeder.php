@@ -29,31 +29,34 @@ class UserTableSeeder extends Seeder
 
         $user = new User();
         $user->name = 'Luis';
-        $user->email = 'suser@gmail.com';
+        $user->email = 'sistemas@prosarc.com.co';
         $user->password = bcrypt('secret');
         $user->UsSlug = 'Luis1';
         $user->UsRol = 'Programador';
         $user->UsRolDesc = 'Programador de Software';
+        $user->UsAvatar = 'avatar1.gif';
         $user->save();
         /*$user->roles()->attach($role_suser);*/
 
         $user = new User();
-        $user->name = 'User';
-        $user->email = 'User@gmail.com';
-        $user->password = bcrypt('secret');
+        $user->name = 'Vigilante';
+        $user->email = 'vigilante@prosarc.com.co';
+        $user->password = bcrypt('seguridad2019');
         $user->UsSlug = 'User1';
-        $user->UsRol = 'Usuario';
-        $user->UsRolDesc = 'Usuario general';
+        $user->UsRol = 'Vigilante';
+        $user->UsRolDesc = 'Vigilante Pro';
+        $user->UsAvatar = 'avatar5.png';
         $user->save();
         /*$user->roles()->attach($role_user);*/
 
         $user = new User();
         $user->name = 'Leider';
-        $user->email = 'admin@gmail.com';
-        $user->password = bcrypt('secret');
+        $user->email = 'gerenteplanta@prosarc.com.co';
+        $user->password = bcrypt('gerenteplanta2019');
         $user->UsSlug = 'Leider1';
         $user->UsRol = 'admin';
         $user->UsRolDesc = 'Director de Planta';
+        $user->UsAvatar = 'avatar3.png';
         $user->save();
         /*$user->roles()->attach($role_admin);*/
 
@@ -64,6 +67,7 @@ class UserTableSeeder extends Seeder
         $user->UsSlug = 'Juan1';
         $user->UsRol = 'JefeLogistica';
         $user->UsRolDesc = 'Jefe de Logistica';
+        $user->UsAvatar = 'avatar5.png';
         $user->save();
         /*$user->roles()->attach($role_jlogistica);*/
 
@@ -74,6 +78,7 @@ class UserTableSeeder extends Seeder
         $user->UsSlug = 'Victor1';
         $user->UsRol = 'JefeOperacion';
         $user->UsRolDesc = 'Jefe de Operaciones';
+        $user->UsAvatar = 'avatar5.png';
         $user->save();
         /*$user->roles()->attach($role_joperacion);*/
 
@@ -84,6 +89,7 @@ class UserTableSeeder extends Seeder
         $user->UsSlug = 'Duvan1';
         $user->UsRol = 'AsistenteLogistica';
         $user->UsRolDesc = 'Asistente de Logistica';
+        $user->UsAvatar = 'avatar5.png';
         $user->save();
         /*$user->roles()->attach($role_asistlogistica);*/
 
@@ -94,6 +100,7 @@ class UserTableSeeder extends Seeder
         $user->UsSlug = 'TestClient1';
         $user->UsRol = 'Cliente';
         $user->UsRolDesc = 'Cliente registrado';
+        $user->UsAvatar = 'avatar5.png';
         $user->save();
         /*$user->roles()->attach($role_client);*/
 
@@ -104,6 +111,7 @@ class UserTableSeeder extends Seeder
         $user->UsSlug = 'GeneradorProsarc1';
         $user->UsRol = 'Generador';
         $user->UsRolDesc = 'Generador de residuos';
+        $user->UsAvatar = 'avatar5.png';
         $user->save();
         /*$user->roles()->attach($role_gener);*/
 
@@ -114,6 +122,7 @@ class UserTableSeeder extends Seeder
         $user->UsSlug = 'Peter1';
         $user->UsRol = 'AuxiliarLogistica';
         $user->UsRolDesc = 'Auxiliar de Logistica';
+        $user->UsAvatar = 'avatar5.png';
         $user->save();
         /*$user->roles()->attach($role_auxlogistica);*/
 
@@ -124,6 +133,7 @@ class UserTableSeeder extends Seeder
         $user->UsSlug = 'Camilo1';
         $user->UsRol = 'SupervisorTurno';
         $user->UsRolDesc = 'Supervisor de Turno';
+        $user->UsAvatar = 'avatar5.png';
         $user->save();
         /*$user->roles()->attach($role_sturno);*/
 
@@ -134,6 +144,7 @@ class UserTableSeeder extends Seeder
         $user->UsSlug = 'William1';
         $user->UsRol = 'SupervisorTurno';
         $user->UsRolDesc = 'Supervisor de Turno';
+        $user->UsAvatar = 'avatar5.png';
         $user->save();
         /*$user->roles()->attach($role_sturno);*/
 
@@ -144,6 +155,7 @@ class UserTableSeeder extends Seeder
         $user->UsSlug = 'Camilo21';
         $user->UsRol = 'SupervisorTurno';
         $user->UsRolDesc = 'Supervisor de Turno';
+        $user->UsAvatar = 'avatar5.png';
         $user->save();
         /*$user->roles()->attach($role_sturno);*/
 
@@ -154,6 +166,7 @@ class UserTableSeeder extends Seeder
         $user->UsSlug = 'Sandro1';
         $user->UsRol = 'EncargadoAlmacen';
         $user->UsRolDesc = 'Encargado de Almacen';
+        $user->UsAvatar = 'avatar5.png';
         $user->save();
         /*$user->roles()->attach($role_ealmacen);*/
 
@@ -164,6 +177,7 @@ class UserTableSeeder extends Seeder
         $user->UsSlug = 'Horno1';
         $user->UsRol = 'EncargadoHorno';
         $user->UsRolDesc = 'Encargado de Horno';
+        $user->UsAvatar = 'avatar5.png';
         $user->save();
         /*$user->roles()->attach($role_ehorno);*/
 

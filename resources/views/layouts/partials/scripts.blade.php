@@ -11,33 +11,7 @@
 {{-- SmartWizard --}}
 
 
-{{-- bootstrap-switch --}}
 
-
-<!-- funcion para flitrado de tablas -->
-<script>
-  $(document).ready(function(){
-      $('input[name="CliNit"]').mask('999.999.999.999-9');
-      $('input[name="cliente"]').mask('999.999.999.999-9');
-      $('input[name="SedePhone2"]').mask('(999)-999 9999');
-      $('input[name="SedePhone1"]').mask('(999)-999 9999');
-      $('input[name="SedeCelular"]').mask('(999)-999 9999');
-      $('input[name="GenerNit"]').mask('999.999.999.999-9');
-      $('input[name="GSedePhone2"]').mask('(999)-999 9999');
-      $('input[name="GSedePhone1"]').mask('(999)-999 9999');
-      $('input[name="GSedeCelular"]').mask('(999)-999 9999');
-      $('input[name="GSedeinputext1"]').mask('999-9');
-      $('input[name="GSedeinputext2"]').mask('999-9');
-      $('input[name="CargSalary"]').mask('000.000.000.000');
-  });
-</script>
-
-{{-- funcion para recargar lista de generadores de cada cliente mediante ajax--}}
-
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-      Both of these plugins are recommended to enhance the
-      user experience. Slimscroll is required when using the
-      fixed layout. -->
 <script type="text/javascript">
     $(Selector.sidebar).slimScroll({
       height: ($(window).height() - $(Selector.mainHeader).height()) + 'px',
@@ -92,7 +66,7 @@
       "keys": true,
       "responsive": true,
       "columnDefs": [ {
-        "targets": 5,
+        "targets": 6,
         "data": "ID_Asis",
         "render": function ( data, type, row, meta ) {
           return "<a href='/asistencia/" + data + "/edit' class='btn btn-warning'>Edit</a>";
@@ -112,4 +86,4 @@
     });
   });
 </script>
-
+@yield('newScript')

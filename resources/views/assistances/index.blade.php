@@ -23,36 +23,51 @@
                 <thead>
                   <tr>
                     <th>Nombre</th>
+                    <th>Fecha</th>
                     <th>Hora Llegada</th>
                     <th>Trabajando</th>
-                    <th>Hora Salida</th>                    
+                    <th>Hora Salida</th>
                     <th>Horas Trabajdas</th>
                   </tr>
                 </thead>
                 <tbody  hidden onload="renderTable()" id="readyTable">
                   {{-- <h1 id="loadingTable">LOADING...</h1> --}}
                   <div class="fingerprint-spinner" id="loadingTable">
-                    <div class="spinner-ring"><b style="font-size: 1.8rem;">L</b></div>
-                    <div class="spinner-ring"><b style="font-size: 1.8rem;">o</b></div>
-                    <div class="spinner-ring"><b style="font-size: 1.8rem;">a</b></div>
-                    <div class="spinner-ring"><b style="font-size: 1.8rem;">d</b></div>
-                    <div class="spinner-ring"><b style="font-size: 1.8rem;">i</b></div>
-                    <div class="spinner-ring"><b style="font-size: 1.8rem;">n</b></div>
-                    <div class="spinner-ring"><b style="font-size: 1.8rem;">g</b></div>
-                    <div class="spinner-ring"><b style="font-size: 1.8rem;">.</b></div>
-                    <div class="spinner-ring"><b style="font-size: 1.8rem;">.</b></div>
+                    <div class="spinner-ring"><b style="font-size: 1.8rem;"></b></div>
+                    <div class="spinner-ring"><b style="font-size: 1.8rem;"></b></div>
+                    <div class="spinner-ring"><b style="font-size: 1.8rem;"></b></div>
+                    <div class="spinner-ring"><b style="font-size: 1.8rem;"></b></div>
+                    <div class="spinner-ring"><b style="font-size: 1.8rem;"></b></div>
+                    <div class="spinner-ring"><b style="font-size: 1.8rem;"></b></div>
+                    <div class="spinner-ring"><b style="font-size: 1.8rem;"></b></div>
+                    <div class="spinner-ring"><b style="font-size: 1.8rem;"></b></div>
+                    <div class="spinner-ring"><b style="font-size: 1.8rem;"></b></div>
                   </div>
                     @foreach($Asistencias as $Asistencia)
                     <tr>
                       <td>{{$Asistencia->PersFirstName." ".$Asistencia->PersLastName}}</td>
-                      <td>{{$Asistencia->AsisLlegada}}</td>
+                      <td>{{$Asistencia->AsisFecha}}</td>
+                      <td>{{date('h:i a',strtotime($Asistencia->AsisLlegada))}}</td>
                       @if($Asistencia->AsisStatus == 0)
                         <td>No</td>
                       @else
                         <td>Si</td>
                       @endif
-                      <td>{{$Asistencia->AsisSalida}}</td>
-                      <td>{{$Asistencia->AsisNocturnas}}</td>         
+                      @if($Asistencia->AsisSalida)
+                        <td>{{date('h:i a',strtotime($Asistencia->AsisSalida))}}</td>
+                      @else
+                        <td></td>
+                      @endif()
+                      <td><?php
+                            $horas = 0;
+                            $minutos = $Asistencia->AsisTrabajadas;
+                            while($minutos >= 60){
+                                $horas += 1; 
+                                $minutos -= 60;
+                            }
+                            echo $horas." Horas : ".$minutos." Min";
+                          ?>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -64,18 +79,13 @@
               <table id="AssistancesTable1" class="table table-compact table-bordered table-striped">
                 <thead>
                   <tr>
-                    {{-- @if ($) --}}
                       <th>Nombre</th>
+                      <th>Fecha</th>
                       <th>Hora Llegada</th>
                       <th>Trabajando</th>
                       <th>Hora Salida</th>
-                    {{-- @else --}}
-                        
-                    <th>Horas Trabajdas</th>
-                      @if (Auth::user()->UsRol == "Programador")
+                      <th>Horas Trabajdas</th>
                       <th>Editar</th>
-                      @endif
-                      {{-- @endif --}}
                   </tr>
                 </thead>
                 <tbody  hidden onload="renderTable()" id="readyTable">
@@ -94,17 +104,29 @@
                     @foreach($Asistencias as $Asistencia)
                     <tr>
                       <td>{{$Asistencia->PersFirstName." ".$Asistencia->PersLastName}}</td>
-                      <td>{{$Asistencia->AsisLlegada}}</td>
+                      <td>{{$Asistencia->AsisFecha}}</td>
+                      <td>{{date('h:i a',strtotime($Asistencia->AsisLlegada))}}</td>
                       @if($Asistencia->AsisStatus == 0)
                         <td>No</td>
                       @else
                         <td>Si</td>
                       @endif
-                      <td>{{$Asistencia->AsisSalida}}</td>
-                      <td>{{$Asistencia->AsisNocturnas}}</td>
-                      @if (Auth::user()->UsRol == "Programador")
+                      @if($Asistencia->AsisSalida)
+                        <td>{{date('h:i a',strtotime($Asistencia->AsisSalida))}}</td>
+                      @else
+                        <td></td>
+                      @endif()
+                      <td><?php
+                            $horas = 0;
+                            $minutos = $Asistencia->AsisTrabajadas;
+                            while($minutos >= 60){
+                                $horas += 1; 
+                                $minutos -= 60;
+                            }
+                            echo $horas." Horas : ".$minutos." Min";
+                          ?>
+                      </td>
                       <td>{{$Asistencia->ID_Asis}}</td>
-                      @endif          
                     </tr>
                     @endforeach
                 </tbody>

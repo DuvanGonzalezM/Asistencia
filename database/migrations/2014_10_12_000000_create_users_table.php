@@ -21,9 +21,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->string('UsType', 64)->nullable()->change();
-            $table->string('UsAvatar', 255)->nullable()->change();
-            $table->string('UsStatus', 32)->nullable()->change();
+            $table->string('UsType', 64)->nullable();
+            $table->string('UsAvatar', 255)->nullable();
+            $table->string('UsStatus', 32)->nullable();
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';

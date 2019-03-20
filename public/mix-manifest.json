@@ -4,5 +4,7 @@
     "/css/all.css": "/css/all.css",
     "/css/all-landing.css": "/css/all-landing.css",
     "/css/datatable-depen.css": "/css/datatable-depen.css",
-    "/js/datatable-depen.js": "/js/datatable-depen.js"
+    "/js/datatable-depen.js": "/js/datatable-depen.js",
+    "/css/stilosPropios.css": "/css/stilosPropios.css",
+    "/js/webcodecam.js": "/js/webcodecam.js"
 }

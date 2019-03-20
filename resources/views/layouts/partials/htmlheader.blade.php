@@ -6,7 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
 
-    <link href="{{ mix('css/all.css') }}" rel="stylesheet" type="text/css">    
+    <link href="{{ mix('css/all.css') }}" rel="stylesheet" type="text/css">
+     <link href="{{ mix('css/stilosPropios.css') }}" rel="stylesheet" type="text/css">
 
     {{-- fuentes de google --}}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">

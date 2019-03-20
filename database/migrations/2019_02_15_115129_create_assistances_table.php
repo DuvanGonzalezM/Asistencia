@@ -18,7 +18,7 @@ class CreateAssistancesTable extends Migration
             $table->date('AsisFecha');
             $table->dateTime('AsisLlegada');
             $table->dateTime('AsisSalida')->nullable();
-            $table->integer('AsisNocturnas')->nullable();
+            $table->integer('AsisTrabajadas')->nullable();
             $table->boolean('AsisStatus');
             $table->unsignedInteger('FK_AsisPers');
             $table->foreign('FK_AsisPers')->references('ID_Pers')->on('personals');

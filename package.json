@@ -38,12 +38,14 @@
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^2.0.1",
     "icheck": "^1.0.2",
-    "ionicons": "^3.0.0",
     "jquery": "^3.2",
     "laravel-mix": "^2.0",
     "lodash": "^4.17.4",
     "popper.js": "^1.14.7",
     "vue": "^2.6.6"
   },
-  "dependencies": {}
+  "dependencies": {
+    "instascan": "^1.0.0",
+    "webcodecamjs": "^2.0.5"
+  }
 }

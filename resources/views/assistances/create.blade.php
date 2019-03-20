@@ -1,97 +1,132 @@
 @extends('layouts.app')
 
 @section('htmlheader_title','Asistencia')
-
-@section('contentheader_title', 'Asistencia')
-
-@section('main-content')
-  <div class="container-fluid spark-screen">
-    <div class="row">
-      <div class="col-md-16 col-md-offset-0">
-        <!-- /.box -->
-        <div class="box">
-          <div class="box-header">
-            <h3 class="box-title">Asistencia del personal</h3>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-body">
-            <table id="Vigilante" class="table table-compact table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Documento</th>
-                  <th>Entrada</th>
-                  <th>Salida</th>
-                </tr>
-              </thead>
-              <tbody  hidden onload="renderTable()" id="readyTable">
-                {{-- <h1 id="loadingTable">LOADING...</h1> --}}
-                <div class="fingerprint-spinner" id="loadingTable">
-                  <div class="spinner-ring"><b style="font-size: 1.8rem;">L</b></div>
-                  <div class="spinner-ring"><b style="font-size: 1.8rem;">o</b></div>
-                  <div class="spinner-ring"><b style="font-size: 1.8rem;">a</b></div>
-                  <div class="spinner-ring"><b style="font-size: 1.8rem;">d</b></div>
-                  <div class="spinner-ring"><b style="font-size: 1.8rem;">i</b></div>
-                  <div class="spinner-ring"><b style="font-size: 1.8rem;">n</b></div>
-                  <div class="spinner-ring"><b style="font-size: 1.8rem;">g</b></div>
-                  <div class="spinner-ring"><b style="font-size: 1.8rem;">.</b></div>
-                  <div class="spinner-ring"><b style="font-size: 1.8rem;">.</b></div>
-                </div>
-                   @foreach($personal as $persona)
-                      <?php $Llegada = 0; $Salida = 1;?>
-                      @foreach($Asistencias as $Asistencia)
-                         @if($persona->ID_Pers == $Asistencia->FK_AsisPers)
-                            <?php $Llegada = 1; $id=$Asistencia->ID_Asis;?>
-                            @if($Asistencia->AsisSalida === null)
-                              <?php $Salida = 0; $Llegada = 1;?>
+@section('newScript')
+  <script src="{{ url (mix('/js/webcodecam.js')) }}"></script>
+  <script type="text/javascript">
+      var arg = {
+          resultFunction: function(result) {
+            document.getElementById("miEnlace").click();
+            var micapa = document.getElementById('spanModal');
+            var label = document.getElementById('divModal');
+            var form = document.getElementById('divModal');
+            var id_pers = 0;
+            @foreach($personal as $persona)
+                if({{$persona->PersDocNumber}} == result.code){
+                  id_pers = {{$persona->ID_Pers}};
+                  var nom_pers = "{{$persona->PersFirstName}}";
+                  var llego = 0;
+                  var salio = 1;
+                }
+            @endforeach
+            if (id_pers === 0) {
+                id_pers = "La persona no se encuentra en la base de datos";
+                micapa.innerHTML= '<p>'+id_pers+'</p>';
+                setTimeout ('document.getElementById("close").click();',3000);
+            }
+            else{
+              @foreach($Asistencias as $Asistencia)
+                if ({{$Asistencia->FK_AsisPers}} === id_pers) {
+                    @if($Asistencia->AsisFecha === date('Y-m-d'))
+                        @if($Asistencia->AsisSalida == null)
+                            <?php 
+                              $intervaloL = now()->diffInMinutes($Asistencia->AsisLlegada);
+                            ?>
+                            @if($intervaloL >= 60)
+                              llego = 1;
+                              salio = 0;
+                              var salida = {{$Asistencia->ID_Asis}};
                             @else
-                              <?php $Salida = 1; $Llegada = 1;?>
+                              llego = 0;
+                              salio = 0;
                             @endif
-                         @endif
-                      @endforeach
-                      @if($Llegada == 1 AND $Salida == 1)
-                      @else
-                        @if($Llegada == 0 AND $Salida == 1)
-                            <tr>
-                              <td>{{$persona->PersFirstName." ".$persona->PersLastName}}</td>
-                              <td>{{$persona->PersDocNumber}}</td>
-                              <td>
-                                <form id="readyform" action="/asistencia" method="POST">
-                                  @csrf
-                                  <input type="hidden"  value="{{$persona->ID_Pers}}" name='AsisPers'>
-                                  <input type='submit' id='readyform' class='btn btn-block btn-success' value='Llego'>
-                                </form>
-                              </td>
-                              <td>
-                                <input type='submit' id='readyform' class='btn btn-block btn-success disabled' value='Salio'>
-                              </td>
-                            </tr>
-                        @elseif($Llegada == 1 AND $Salida == 0)
-                            <tr>
-                              <td>{{$persona->PersFirstName." ".$persona->PersLastName}}</td>
-                              <td>{{$persona->PersDocNumber}}</td>
-                              <td>
-                                <input type='submit' id='readyform' class='btn btn-block btn-success disabled' value='Llego'>
-                              </td>
-                              <td>
-                                <form id="readyform" action="/asistencia/{{$id}}" method="POST">
-                                  @method('PUT')
-                                  @csrf
-                                  <input type="hidden"  value="{{$id}}" name='AsisPers'>
-                                  <input type='submit' id='readyform' class='btn btn-block btn-success' value='Salio'>
-                                </form>
-                              </td>
-                            </tr>
+                        @else
+                            llego = 1;
+                            salio = 1;
                         @endif
-                      @endif
-                   @endforeach
-              </tbody>
-            </table>
+                    @else
+                        @if($Asistencia->AsisSalida == null)
+                          llego = 1;
+                          salio = 0;
+                          var salida = {{$Asistencia->ID_Asis}};
+                        @else
+                            <?php
+                              $intervaloS = now()->diffInMinutes($Asistencia->AsisSalida);
+                            ?>
+                            @if($intervaloS <= 60)
+                              llego = 1;
+                              salio = 1;
+                            @else
+                              llego = 0;
+                              salio = 1;
+                            @endif
+                        @endif
+                    @endif
+                }
+              @endforeach
+              if(llego == 0 && salio == 1){
+                  micapa.innerHTML= '<p>Ingresa <b>'+nom_pers+'</b> con el documento: <b>'+result.code+'</b></p>';
+                  document.getElementById("Llegada").value = id_pers;
+                  label.innerHTML= '<label for="Llegada" class="btn btn-success" id="label1">Confirmar</label>';
+                  setTimeout ('document.getElementById("label1").click();',3000);
+              }
+              else if(llego == 1 && salio== 0){
+                  micapa.innerHTML= '<p>Se retira <b>'+nom_pers+'</b> con el documento: <b>'+result.code+'</b></p>';
+                  label.innerHTML= '<label for="Salida" class="btn btn-success" id="label1">Confirmar</label>';
+                  document.getElementById('formulario2').action = '/asistencia/'+salida;
+                  setTimeout ('document.getElementById("label1").click();',3000);
+              }
+              else if(llego == 0 && salio== 0){
+                  id_pers = "Usted ya ha marcado su ingreso";
+                  micapa.innerHTML= '<p>'+id_pers+'</p>';
+                  setTimeout ('document.getElementById("close").click();',3000);
+              }
+              else if(llego == 1 && salio== 1){
+                  id_pers = "Usted ya ha marcado su salida";
+                  micapa.innerHTML= '<p>'+id_pers+'</p>';
+                  setTimeout ('document.getElementById("close").click();',3000);
+              }
+              else{
+                 micapa.innerHTML= '<p>Usted ya ha marcado su salida</p>';
+                 setTimeout ('document.getElementById("close").click();',3000);
+              }
+            }
+          }
+      };
+      new WebCodeCamJS("canvas").init(arg).play();
+  </script>
+@endsection
+@section('contentheader_title', 'Asistencia')
+@section('main-content')
+{{--  Modal --}}
+    <div class="modal modal-default fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close"><span aria-hidden="true">&times;</span></button>
+            <div style="font-size: 5em; color: #3c8dbc; text-align: center; margin: auto;">
+              <i class="fa fa-users"></i>
+              <span style="font-size: 0.3em; color: black;" id="spanModal"></span>
+            </div> 
           </div>
-          <!-- /.box-body -->
+          <div class="modal-footer" id="divModal">
+          </div>
         </div>
-        <!-- /.box -->
       </div>
     </div>
-  </div>
+{{-- END Modal --}}
+  <center>
+    <h3>Ingreso/Salida del personal</h3>
+    <canvas id="QrScann"></canvas>
+    <a href="#" data-toggle='modal' data-target='#myModal' id="miEnlace" style="display: none;">enlace</a>
+  </center>
+  <form action="/asistencia" method="POST" id="formulario1">
+    @csrf
+    <input type="submit" name="Llegada" id="Llegada" style="display: none;">
+  </form>
+  <form action="" method="POST" id="formulario2">
+    @method("PUT")
+    @csrf
+    <input type="submit" name="Salida" id="Salida" style="display: none;" value ="">
+  </form>
 @endsection
