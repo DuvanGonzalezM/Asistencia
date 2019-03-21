@@ -3,7 +3,11 @@
 @section('htmlheader_title','Asistencia')
 
 @section('contentheader_title', 'Asistencia')
-
+@section('newScript')
+    <!-- DataTables -->
+    <script src="{{ url (mix('/js/datatable-depen.js')) }}"></script>
+    @include('layouts.partials.scriptDT')
+@endsection
 @section('main-content')
 	<div class="container-fluid spark-screen">
     <div class="row">
