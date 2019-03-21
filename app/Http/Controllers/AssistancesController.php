@@ -24,7 +24,7 @@ class AssistancesController extends Controller
         ->get();
         foreach ($Asistencias as $Asistencia) {
             $validacion = now()->diffInMinutes($Asistencia->AsisLlegada);
-            if ($validacion >= 840 && is_null($Asistencia->AsisSalida)) {
+            if ($validacion >= 960 && is_null($Asistencia->AsisSalida)) {
                 $newDate = strtotime ('+8 hour',strtotime($Asistencia->AsisLlegada));
                 $newDate = date ('Y-m-j H:i:s',$newDate);
                 $Asis = Assistance::where('ID_Asis',$Asistencia->ID_Asis)->first();
@@ -54,7 +54,7 @@ class AssistancesController extends Controller
             ->get();
         foreach ($Asistencias as $Asistencia) {
             $validacion = now()->diffInMinutes($Asistencia->AsisLlegada);
-            if ($validacion >= 840 && is_null($Asistencia->AsisSalida)) {
+            if ($validacion >= 960 && is_null($Asistencia->AsisSalida)) {
                 $newDate = strtotime ('+8 hour',strtotime($Asistencia->AsisLlegada));
                 $newDate = date ('Y-m-j H:i:s',$newDate);
                 $Asis = Assistance::where('ID_Asis',$Asistencia->ID_Asis)->first();

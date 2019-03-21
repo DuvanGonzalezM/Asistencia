@@ -22,7 +22,7 @@
             if (id_pers === 0) {
                 id_pers = "La persona no se encuentra en la base de datos";
                 micapa.innerHTML= '<p>'+id_pers+'</p>';
-                setTimeout ('document.getElementById("close").click();',3000);
+                setTimeout ('document.getElementById("close").click();',1500);
             }
             else{
               @foreach($Asistencias as $Asistencia)
@@ -68,27 +68,27 @@
                   micapa.innerHTML= '<p>Ingresa <b>'+nom_pers+'</b> con el documento: <b>'+result.code+'</b></p>';
                   document.getElementById("Llegada").value = id_pers;
                   label.innerHTML= '<label for="Llegada" class="btn btn-success" id="label1">Confirmar</label>';
-                  setTimeout ('document.getElementById("label1").click();',3000);
+                  setTimeout ('document.getElementById("label1").click();',1500);
               }
               else if(llego == 1 && salio== 0){
                   micapa.innerHTML= '<p>Se retira <b>'+nom_pers+'</b> con el documento: <b>'+result.code+'</b></p>';
                   label.innerHTML= '<label for="Salida" class="btn btn-success" id="label1">Confirmar</label>';
                   document.getElementById('formulario2').action = '/asistencia/'+salida;
-                  setTimeout ('document.getElementById("label1").click();',3000);
+                  setTimeout ('document.getElementById("label1").click();',1500);
               }
               else if(llego == 0 && salio== 0){
                   id_pers = "Usted ya ha marcado su ingreso";
                   micapa.innerHTML= '<p>'+id_pers+'</p>';
-                  setTimeout ('document.getElementById("close").click();',3000);
+                  setTimeout ('document.getElementById("close").click();',1500);
               }
               else if(llego == 1 && salio== 1){
                   id_pers = "Usted ya ha marcado su salida";
                   micapa.innerHTML= '<p>'+id_pers+'</p>';
-                  setTimeout ('document.getElementById("close").click();',3000);
+                  setTimeout ('document.getElementById("close").click();',1500);
               }
               else{
                  micapa.innerHTML= '<p>Usted ya ha marcado su salida</p>';
-                 setTimeout ('document.getElementById("close").click();',3000);
+                 setTimeout ('document.getElementById("close").click();',1500);
               }
             }
           }
