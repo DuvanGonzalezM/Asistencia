@@ -80,16 +80,25 @@ class AssistancesController extends Controller
      */
     public function store(Request $request){
         // return $request;
+        $ID_Pers = $request->input('Llegada');
+        $Asistencias = DB::table('assistances')
+            ->select('FK_AsisPers','ID_Asis','AsisSalida','AsisLlegada','AsisFecha')
+            ->where('AsisFecha', '=', date('Y-m-d'))
+            ->where('FK_AsisPers', '=', $ID_Pers)
+            ->get();
+        // return $Asistencias;
+        foreach ($Asistencias as $Asistencia) {
+            if($Asistencia->AsisFecha == date('Y-m-d')){
+                return back();
+            }
+        }
         $Asistencia = new Assistance();
         $Asistencia->AsisLlegada = now();
         $Asistencia->AsisFecha = date('Y-m-d');
         $Asistencia->AsisTrabajadas = 0;
         $Asistencia->AsisStatus = 1;
-        $Asistencia->FK_AsisPers = $request->input('Llegada');
+        $Asistencia->FK_AsisPers = $ID_Pers;
         $Asistencia->save();
-        // return $Asistencia;
-        // return redirect()->route('asistencia.create', compact('Asistencia2'));
-        // return redirect()->route('asistencia.create');
         return back();
     }
 
