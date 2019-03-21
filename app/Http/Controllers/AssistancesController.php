@@ -89,7 +89,8 @@ class AssistancesController extends Controller
         $Asistencia->save();
         // return $Asistencia;
         // return redirect()->route('asistencia.create', compact('Asistencia2'));
-        return redirect()->route('asistencia.create');
+        // return redirect()->route('asistencia.create');
+        return back();
     }
 
     /**
@@ -133,7 +134,8 @@ class AssistancesController extends Controller
                 $Asistencia->AsisTrabajadas = $Asistencia->AsisSalida->diffInMinutes($Asistencia->AsisLlegada);
                 $Asistencia->AsisStatus = 0;
                 $Asistencia->save();
-                return redirect()->route('asistencia.create');
+                // return redirect()->route('asistencia.create');
+                return back();
             }
             else{
                 $Asistencia->AsisLlegada = Carbon::createFromFormat('Y-m-d H:i:s', $request->input('llegada'));

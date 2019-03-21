@@ -3,7 +3,7 @@
 @section('htmlheader_title','Asistencia')
 @section('newScript')
   <script src="{{ url (mix('/js/webcodecam.js')) }}"></script>
-  <script type="text/javascript">
+<script type="text/javascript">
       var arg = {
           resultFunction: function(result) {
             document.getElementById("miEnlace").click();
@@ -93,12 +93,13 @@
             }
           }
       };
-      new WebCodeCamJS("canvas").init(arg).play();
+      var decoder = new WebCodeCamJS ("canvas"). init (arg).buildSelectMenu ('select', 1);
+      setTimeout (function () {decoder.play ();}, 500);
   </script>
 @endsection
 @section('contentheader_title', 'Asistencia')
 @section('main-content')
-{{--  Modal --}}
+      {{--  Modal --}}
     <div class="modal modal-default fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -119,6 +120,7 @@
     <h3>Ingreso/Salida del personal</h3>
     <canvas id="QrScann"></canvas>
     <a href="#" data-toggle='modal' data-target='#myModal' id="miEnlace" style="display: none;">enlace</a>
+    <select style="display: none;"></select>
   </center>
   <form action="/asistencia" method="POST" id="formulario1">
     @csrf
