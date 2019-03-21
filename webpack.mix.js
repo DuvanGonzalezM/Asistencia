@@ -12,8 +12,8 @@ const { mix } = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .js('resources/assets/js/app-landing.js', 'public/js/app-landing.js')
-   .sourceMaps()
+   // .js('resources/assets/js/app-landing.js', 'public/js/app-landing.js')
+   // .sourceMaps()
    .combine([
        'resources/assets/css/bootstrap.min.css',
        'resources/assets/css/font-awesome.min.css',
