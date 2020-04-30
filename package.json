@@ -38,7 +38,7 @@
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^2.0.1",
     "icheck": "^1.0.2",
-    "jquery": "^3.2",
+    "jquery": "^3.5",
     "laravel-mix": "^2.0",
     "lodash": "^4.17.4",
     "popper.js": "^1.14.7",
